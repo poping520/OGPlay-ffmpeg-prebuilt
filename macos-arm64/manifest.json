@@ -68,6 +68,7 @@
   ],
   "deployment_target": "11.0",
   "shared_headers": "include",
+  "shared_licenses": "licenses",
   "files": [
     {
       "path": "exports.txt",
@@ -78,16 +79,6 @@
       "path": "lib/libogplay_ffmpeg.dylib",
       "size": 4255104,
       "sha256": "db344153e742466c6ba04d0613d2e7802fb4520c5116ba6a95ef86ebe6f1593e"
-    },
-    {
-      "path": "licenses/FFmpeg-COPYING.LGPLv2.1",
-      "size": 26517,
-      "sha256": "246041b6ecf9bc32d718a62c57877c78b5eb397b6467e74ed7ae2626ab189c30"
-    },
-    {
-      "path": "licenses/FFmpeg-LICENSE.md",
-      "size": 4346,
-      "sha256": "2e1d16c72fd74e12063776371da757322f8b77589386532f4fd8634bde7de1af"
     }
   ]
 }

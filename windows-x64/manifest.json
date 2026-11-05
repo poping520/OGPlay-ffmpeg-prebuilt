@@ -90,16 +90,7 @@
       "path": "lib/ogplay_ffmpeg.lib",
       "size": 219066,
       "sha256": "c1c75945fc951f203b1151d19d16189f3c4d1975e99e54b06f28274a31dac04d"
-    },
-    {
-      "path": "licenses/FFmpeg-COPYING.LGPLv2.1",
-      "size": 27019,
-      "sha256": "37828f96b745455c387a19946bc005b5e0b7c4cef782bbd67e9de5130d7d0bdc"
-    },
-    {
-      "path": "licenses/FFmpeg-LICENSE.md",
-      "size": 4473,
-      "sha256": "36f6e2cb63f6a40a72b5c1b6169fb03f338d7eccd336fb3ccd4dcc0b49116dd1"
     }
-  ]
+  ],
+  "shared_licenses": "licenses"
 }
