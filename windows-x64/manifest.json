@@ -1,0 +1,105 @@
+{
+  "schema_version": 1,
+  "kind": "platform",
+  "platform": "windows-x64",
+  "os": "windows",
+  "cpu": "x64",
+  "ffmpeg_tag": "n8.1.3",
+  "ffmpeg_commit": "1041abdc962f4cc4f394aa8de9dc5236c0c3b9e7",
+  "library_versions": {
+    "avformat": "62.12.103",
+    "avcodec": "62.28.103",
+    "swscale": "9.5.103",
+    "swresample": "6.3.103",
+    "avutil": "60.26.103"
+  },
+  "toolchain": "Microsoft (R) C/C++ Optimizing Compiler Version 19.51.36252 for x64",
+  "configure_args": [
+    "--disable-everything",
+    "--disable-autodetect",
+    "--disable-programs",
+    "--disable-doc",
+    "--disable-network",
+    "--disable-avdevice",
+    "--disable-avfilter",
+    "--disable-debug",
+    "--enable-static",
+    "--disable-shared",
+    "--enable-pic",
+    "--enable-avcodec",
+    "--enable-avformat",
+    "--enable-swscale",
+    "--enable-swresample",
+    "--toolchain=msvc",
+    "--arch=x86_64",
+    "--target-os=win64",
+    "--enable-w32threads",
+    "--enable-x86asm",
+    "--extra-cflags=-MD",
+    "--enable-demuxer=mov",
+    "--enable-decoder=h264,mpeg4,aac",
+    "--enable-parser=h264,mpeg4video,aac"
+  ],
+  "components": {
+    "decoder": [
+      "aac",
+      "h263",
+      "h264",
+      "mpeg4"
+    ],
+    "demuxer": [
+      "mov"
+    ],
+    "parser": [
+      "aac",
+      "h264",
+      "mpeg4video"
+    ]
+  },
+  "library": "bin/ogplay_ffmpeg.dll",
+  "import_library": "lib/ogplay_ffmpeg.lib",
+  "export_count": 962,
+  "dependencies": [
+    "KERNEL32.dll",
+    "VCRUNTIME140.dll",
+    "api-ms-win-crt-convert-l1-1-0.dll",
+    "api-ms-win-crt-environment-l1-1-0.dll",
+    "api-ms-win-crt-filesystem-l1-1-0.dll",
+    "api-ms-win-crt-heap-l1-1-0.dll",
+    "api-ms-win-crt-math-l1-1-0.dll",
+    "api-ms-win-crt-runtime-l1-1-0.dll",
+    "api-ms-win-crt-stdio-l1-1-0.dll",
+    "api-ms-win-crt-string-l1-1-0.dll",
+    "api-ms-win-crt-time-l1-1-0.dll",
+    "api-ms-win-crt-utility-l1-1-0.dll",
+    "bcrypt.dll"
+  ],
+  "shared_headers": "include",
+  "files": [
+    {
+      "path": "bin/ogplay_ffmpeg.dll",
+      "size": 4565504,
+      "sha256": "3b1f48f1b63df82ea1dd764e090c14270d29dac83ce2e348fb6d3877636630c7"
+    },
+    {
+      "path": "exports.txt",
+      "size": 20203,
+      "sha256": "0b6bb32211d208d678c84df03c28d299f5ef26427c06969e58c37104d798969c"
+    },
+    {
+      "path": "lib/ogplay_ffmpeg.lib",
+      "size": 219066,
+      "sha256": "c1c75945fc951f203b1151d19d16189f3c4d1975e99e54b06f28274a31dac04d"
+    },
+    {
+      "path": "licenses/FFmpeg-COPYING.LGPLv2.1",
+      "size": 27019,
+      "sha256": "37828f96b745455c387a19946bc005b5e0b7c4cef782bbd67e9de5130d7d0bdc"
+    },
+    {
+      "path": "licenses/FFmpeg-LICENSE.md",
+      "size": 4473,
+      "sha256": "36f6e2cb63f6a40a72b5c1b6169fb03f338d7eccd336fb3ccd4dcc0b49116dd1"
+    }
+  ]
+}
