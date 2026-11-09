@@ -4,3 +4,6 @@
 *.lib binary
 *.dylib binary
 *.pdb binary
+*.so binary
+*.mp4 binary
+*.3gp binary
