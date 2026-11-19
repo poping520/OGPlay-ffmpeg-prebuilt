@@ -34,9 +34,9 @@
     "--target-os=android",
     "--enable-cross-compile",
     "--enable-pthreads",
-    "--enable-demuxer=mov",
-    "--enable-decoder=h264,mpeg4,aac",
-    "--enable-parser=h264,mpeg4video,aac",
+    "--enable-demuxer=mov,mp3,ogg",
+    "--enable-decoder=h264,mpeg4,aac,mp3float,vorbis",
+    "--enable-parser=h264,mpeg4video,aac,mpegaudio,vorbis",
     "--cc=aarch64-linux-android23-clang",
     "--ar=llvm-ar",
     "--ranlib=llvm-ranlib",
@@ -48,15 +48,21 @@
       "aac",
       "h263",
       "h264",
-      "mpeg4"
+      "mp3float",
+      "mpeg4",
+      "vorbis"
     ],
     "demuxer": [
-      "mov"
+      "mov",
+      "mp3",
+      "ogg"
     ],
     "parser": [
       "aac",
       "h264",
-      "mpeg4video"
+      "mpeg4video",
+      "mpegaudio",
+      "vorbis"
     ]
   },
   "library": "lib/libogplay_ffmpeg.so",
@@ -77,8 +83,8 @@
     },
     {
       "path": "lib/libogplay_ffmpeg.so",
-      "size": 4481584,
-      "sha256": "057a780d108a2cadbb76d238fb8a390b2eb765611db2c6951fa21c5df8eaa1d2"
+      "size": 4645056,
+      "sha256": "245446f5753fd180feb807cfff62d013070217ed13d638896d24c3b66c74e4ed"
     }
   ]
 }

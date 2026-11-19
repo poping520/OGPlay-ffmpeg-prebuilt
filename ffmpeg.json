@@ -7,9 +7,9 @@
   },
   "library_name": "ogplay_ffmpeg",
   "components": {
-    "demuxer": ["mov"],
-    "decoder": ["h264", "mpeg4", "aac"],
-    "parser": ["h264", "mpeg4video", "aac"]
+    "demuxer": ["mov", "mp3", "ogg"],
+    "decoder": ["h264", "mpeg4", "aac", "mp3float", "vorbis"],
+    "parser": ["h264", "mpeg4video", "aac", "mpegaudio", "vorbis"]
   },
   "implied_components": {
     "decoder": ["h263"]

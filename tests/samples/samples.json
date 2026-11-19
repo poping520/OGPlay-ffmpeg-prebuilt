@@ -30,6 +30,38 @@
     {
       "file": "hevc-aac.mp4",
       "expect": { "status": "unsupported", "stream": "video", "codec": "hevc" }
+    },
+    {
+      "file": "mp3-id3-tags.mp3",
+      "expect": {
+        "status": "ok", "audio_codec": "mp3", "sample_rate": 44100, "channels": 2,
+        "min_audio_samples": 12000, "seek": true
+      }
+    },
+    {
+      "file": "mp3-vbr-xing.mp3",
+      "expect": {
+        "status": "ok", "audio_codec": "mp3", "sample_rate": 22050, "channels": 1,
+        "min_audio_samples": 40000, "seek": true
+      }
+    },
+    {
+      "file": "vorbis.ogg",
+      "expect": {
+        "status": "ok", "audio_codec": "vorbis", "sample_rate": 44100, "channels": 2,
+        "min_audio_samples": 80000, "seek": true
+      }
+    },
+    {
+      "file": "aac-audio-only.m4a",
+      "expect": {
+        "status": "ok", "audio_codec": "aac", "sample_rate": 44100, "channels": 1,
+        "min_audio_samples": 40000, "seek": true
+      }
+    },
+    {
+      "file": "opus.ogg",
+      "expect": { "status": "unsupported", "stream": "audio", "codec": "opus" }
     }
   ]
 }

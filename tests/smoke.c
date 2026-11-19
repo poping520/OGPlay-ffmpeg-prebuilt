@@ -196,19 +196,19 @@ static int Feed(Decoder *d, const AVPacket *packet, AVFrame *frame, Stats *stats
     }
 }
 
-/* Seeks to the middle of the file and requires a decodable video frame. */
-static int SeekCheck(AVFormatContext *fmt, int video_index, Decoder *video, AVPacket *packet,
+/* Seeks to the middle of the file and requires a decodable frame from the stream. */
+static int SeekCheck(AVFormatContext *fmt, int stream_index, Decoder *decoder, AVPacket *packet,
                      AVFrame *frame) {
     int64_t target = fmt->duration > 0 ? fmt->duration / 2 : 0;
     int err = av_seek_frame(fmt, -1, target, AVSEEK_FLAG_BACKWARD);
     if (err < 0) return err;
-    avcodec_flush_buffers(video->ctx);
+    avcodec_flush_buffers(decoder->ctx);
     while ((err = av_read_frame(fmt, packet)) >= 0) {
-        if (packet->stream_index == video_index) {
-            err = avcodec_send_packet(video->ctx, packet);
+        if (packet->stream_index == stream_index) {
+            err = avcodec_send_packet(decoder->ctx, packet);
             av_packet_unref(packet);
             if (err < 0) return err;
-            err = avcodec_receive_frame(video->ctx, frame);
+            err = avcodec_receive_frame(decoder->ctx, frame);
             if (err == 0) {
                 av_frame_unref(frame);
                 return 1;
@@ -221,8 +221,8 @@ static int SeekCheck(AVFormatContext *fmt, int video_index, Decoder *video, AVPa
     if (err != AVERROR_EOF) return err;
     /* Frame threading and B-frame reordering delay output past the last
      * packet; drain the decoder before judging the seek. */
-    if ((err = avcodec_send_packet(video->ctx, NULL)) < 0) return err;
-    err = avcodec_receive_frame(video->ctx, frame);
+    if ((err = avcodec_send_packet(decoder->ctx, NULL)) < 0) return err;
+    err = avcodec_receive_frame(decoder->ctx, frame);
     if (err == 0) {
         av_frame_unref(frame);
         return 1;
@@ -308,8 +308,9 @@ static int Decode(const char *path) {
         goto done;
     }
     int seek_ok = 0;
-    if (vi >= 0) {
-        seek_ok = SeekCheck(fmt, vi, &video, packet, frame);
+    if (vi >= 0 || ai >= 0) {
+        seek_ok = SeekCheck(fmt, vi >= 0 ? vi : ai, vi >= 0 ? &video : &audio,
+                            packet, frame);
         if (seek_ok < 0) {
             status = Fail("seek", seek_ok);
             goto done;
@@ -319,9 +320,11 @@ static int Decode(const char *path) {
     printf("{\"status\":\"ok\"");
     if (vi >= 0)
         printf(",\"video_codec\":\"%s\",\"width\":%d,\"height\":%d,\"video_frames\":%d,"
-               "\"rgba_frames\":%d,\"seek\":%s",
+               "\"rgba_frames\":%d",
                avcodec_get_name(video.ctx->codec_id), stats.width, stats.height,
-               stats.video_frames, stats.rgba_converted, seek_ok ? "true" : "false");
+               stats.video_frames, stats.rgba_converted);
+    if (vi >= 0 || ai >= 0)
+        printf(",\"seek\":%s", seek_ok ? "true" : "false");
     if (ai >= 0)
         printf(",\"audio_codec\":\"%s\",\"sample_rate\":%d,\"channels\":%d,"
                "\"audio_samples\":%lld",

@@ -1,6 +1,6 @@
 # OGPlay FFmpeg Prebuilt SDK
 
-此仓库保存 OGPlay 用于播放游戏 CG 的裁剪版 FFmpeg SDK，以及生成和验证 SDK 的
+此仓库保存 OGPlay 用于播放游戏 CG 和解码音频的裁剪版 FFmpeg SDK，以及生成和验证 SDK 的
 构建工具。OGPlay 通过 `third_party/ffmpeg-prebuilt` 使用 SDK。二进制和清单由
 `tools/build_ffmpeg.py` 生成，构建流程见[维护手册](tools/README.md)。
 
@@ -25,8 +25,9 @@ licenses/               FFmpeg 许可证（各平台共用）+ manifest.json
 
 单一共享库 `ogplay_ffmpeg` 内含 avformat、avcodec、swscale、swresample、avutil，只导出
 FFmpeg 公共 API；编译期直接链接使用，不需要也不支持运行时按名称加载 FFmpeg。
-组件仅限 `mov` demuxer 与 `h264`/`mpeg4`/`h263`/`aac` 解码器（另含对应 parser），无任何
-protocol：媒体必须经自定义 `AVIOContext` 读入。依赖只有系统库。
+目标组件包括 `mov`、`mp3`、`ogg` demuxer 和 `h264`、`mpeg4`、`h263`、`aac`、
+`mp3float`、`vorbis` 解码器，另含相应 parser。无 protocol，媒体必须经自定义
+`AVIOContext` 读入。依赖只有系统库。
 
 - macOS 的 install name 为 `@rpath/libogplay_ffmpeg.dylib`，最低系统版本见清单。
 - Windows 使用 MSVC 动态 CRT（`/MD`）。

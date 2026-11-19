@@ -7,10 +7,11 @@
 
 固定配置记录在 [`ffmpeg.json`](../ffmpeg.json)。
 
-- `sync` 从上游浅克隆 tag `n8.1.3`（commit `1041abdc…`）到本地 `ffmpeg/`。
+- `sync` 将配置固定的上游 tag 浅克隆到本地 `ffmpeg/`。
   已有 checkout 必须位于固定提交，标签须指向同一提交，工作树须干净。
-- 组件：demuxer `mov`（mp4/m4v/3gp/mov）；decoder `h264`、`mpeg4`、`aac`；parser `h264`、
-  `mpeg4video`、`aac`。`h263` 解码器由 mpeg4 依赖自动带入，列在 `implied_components`。
+- demuxer 为 `mov`（含 MP4、M4A、3GP）、`mp3`、`ogg`；decoder 为 `h264`、`mpeg4`、
+  `aac`、`mp3float`、`vorbis`；parser 为 `h264`、`mpeg4video`、`aac`、`mpegaudio`、`vorbis`。
+  `h263` 解码器由 `mpeg4` 依赖自动带入，列在 `implied_components`。
   实际启用集合必须与“组件 + 隐含组件”**完全相等**，多一个少一个都构建失败。
 - 无 protocol、encoder、muxer、filter、device、hwaccel、外部库；不含 GPL/nonfree 组件。
 - `consumer_api`：OGPlay 实际调用的函数，构建时检查全部导出。
@@ -66,7 +67,8 @@ python tools/build_ffmpeg.py all --platform windows-x64
 
 MSYS2 的依赖需先在其终端中安装：`pacman -S --needed make nasm diffutils`。
 
-`all` 依次执行以下步骤，也可单独运行：
+`all` 依次执行 `sync`、`build`、`package`、`smoke`、`verify`。最后一步检查仓库内所有
+已打包平台。各命令也可单独运行。
 
 | 命令 | 作用 |
 | --- | --- |
@@ -94,7 +96,8 @@ MSYS2 的依赖需先在其终端中安装：`pacman -S --needed make nasm diffu
    源码经 `src` 符号链接以相对路径编译；Windows DLL 只记录 PDB 文件名。
 6. 冒烟：运行时版本与头文件版本一致；运行时 decoder/demuxer 与配置一致；没有
    encoder/muxer/protocol；样本按 [`tests/samples/samples.json`](../tests/samples/samples.json)
-   判定帧数、尺寸、RGBA 转换、seek、PCM 样本数，未编入的编码必须报告 `unsupported`。
+   判定视频帧数、尺寸、RGBA 转换，以及音频采样率、声道和 PCM 样本数。有视频时在视频流
+   上验证 seek，纯音频样本在音频流上验证。未编入的编码必须按流类型和编码名报告 `unsupported`。
 
 ## 新增编码
 

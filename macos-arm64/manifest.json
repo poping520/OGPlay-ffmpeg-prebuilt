@@ -33,9 +33,9 @@
     "--arch=aarch64",
     "--target-os=darwin",
     "--enable-pthreads",
-    "--enable-demuxer=mov",
-    "--enable-decoder=h264,mpeg4,aac",
-    "--enable-parser=h264,mpeg4video,aac",
+    "--enable-demuxer=mov,mp3,ogg",
+    "--enable-decoder=h264,mpeg4,aac,mp3float,vorbis",
+    "--enable-parser=h264,mpeg4video,aac,mpegaudio,vorbis",
     "--cc=/Library/Developer/CommandLineTools/usr/bin/clang",
     "--ar=/Library/Developer/CommandLineTools/usr/bin/ar",
     "--ranlib=/Library/Developer/CommandLineTools/usr/bin/ranlib",
@@ -49,15 +49,21 @@
       "aac",
       "h263",
       "h264",
-      "mpeg4"
+      "mp3float",
+      "mpeg4",
+      "vorbis"
     ],
     "demuxer": [
-      "mov"
+      "mov",
+      "mp3",
+      "ogg"
     ],
     "parser": [
       "aac",
       "h264",
-      "mpeg4video"
+      "mpeg4video",
+      "mpegaudio",
+      "vorbis"
     ]
   },
   "library": "lib/libogplay_ffmpeg.dylib",
@@ -77,8 +83,8 @@
     },
     {
       "path": "lib/libogplay_ffmpeg.dylib",
-      "size": 4255104,
-      "sha256": "db344153e742466c6ba04d0613d2e7802fb4520c5116ba6a95ef86ebe6f1593e"
+      "size": 4420608,
+      "sha256": "30527aff92748e46db9875d09efe6e2a55990afd6b1ec0d7f606a3d291650d47"
     }
   ]
 }

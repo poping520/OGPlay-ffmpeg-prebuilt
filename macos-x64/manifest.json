@@ -35,9 +35,9 @@
     "--enable-cross-compile",
     "--enable-pthreads",
     "--enable-x86asm",
-    "--enable-demuxer=mov",
-    "--enable-decoder=h264,mpeg4,aac",
-    "--enable-parser=h264,mpeg4video,aac",
+    "--enable-demuxer=mov,mp3,ogg",
+    "--enable-decoder=h264,mpeg4,aac,mp3float,vorbis",
+    "--enable-parser=h264,mpeg4video,aac,mpegaudio,vorbis",
     "--cc=/Library/Developer/CommandLineTools/usr/bin/clang",
     "--ar=/Library/Developer/CommandLineTools/usr/bin/ar",
     "--ranlib=/Library/Developer/CommandLineTools/usr/bin/ranlib",
@@ -51,15 +51,21 @@
       "aac",
       "h263",
       "h264",
-      "mpeg4"
+      "mp3float",
+      "mpeg4",
+      "vorbis"
     ],
     "demuxer": [
-      "mov"
+      "mov",
+      "mp3",
+      "ogg"
     ],
     "parser": [
       "aac",
       "h264",
-      "mpeg4video"
+      "mpeg4video",
+      "mpegaudio",
+      "vorbis"
     ]
   },
   "library": "lib/libogplay_ffmpeg.dylib",
@@ -79,8 +85,8 @@
     },
     {
       "path": "lib/libogplay_ffmpeg.dylib",
-      "size": 5255664,
-      "sha256": "8ce1b43edcb22e4152ed1180f4327cd598b9af998b18f776e47ba61f9a32cc0c"
+      "size": 5454224,
+      "sha256": "56f9f16e2053a7dfdf619bd0cefbd1a147d2b512c75fb4e27607b447c3a78cd2"
     }
   ]
 }
