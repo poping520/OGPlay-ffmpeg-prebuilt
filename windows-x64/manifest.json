@@ -36,24 +36,30 @@
     "--enable-w32threads",
     "--enable-x86asm",
     "--extra-cflags=-MD",
-    "--enable-demuxer=mov",
-    "--enable-decoder=h264,mpeg4,aac",
-    "--enable-parser=h264,mpeg4video,aac"
+    "--enable-demuxer=mov,mp3,ogg",
+    "--enable-decoder=h264,mpeg4,aac,mp3float,vorbis",
+    "--enable-parser=h264,mpeg4video,aac,mpegaudio,vorbis"
   ],
   "components": {
     "decoder": [
       "aac",
       "h263",
       "h264",
-      "mpeg4"
+      "mp3float",
+      "mpeg4",
+      "vorbis"
     ],
     "demuxer": [
-      "mov"
+      "mov",
+      "mp3",
+      "ogg"
     ],
     "parser": [
       "aac",
       "h264",
-      "mpeg4video"
+      "mpeg4video",
+      "mpegaudio",
+      "vorbis"
     ]
   },
   "library": "bin/ogplay_ffmpeg.dll",
@@ -75,11 +81,12 @@
     "bcrypt.dll"
   ],
   "shared_headers": "include",
+  "shared_licenses": "licenses",
   "files": [
     {
       "path": "bin/ogplay_ffmpeg.dll",
-      "size": 4565504,
-      "sha256": "3b1f48f1b63df82ea1dd764e090c14270d29dac83ce2e348fb6d3877636630c7"
+      "size": 4746240,
+      "sha256": "23b47bece2eed168121daf6083b8371858ca68b99b65ddfa98afb01776c177a1"
     },
     {
       "path": "exports.txt",
@@ -91,6 +98,5 @@
       "size": 219066,
       "sha256": "c1c75945fc951f203b1151d19d16189f3c4d1975e99e54b06f28274a31dac04d"
     }
-  ],
-  "shared_licenses": "licenses"
+  ]
 }
